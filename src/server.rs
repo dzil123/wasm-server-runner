@@ -163,7 +163,7 @@ async fn handle_ws(mut socket: WebSocket) {
             _ => unreachable!("got non-text message from websocket"),
         };
 
-        let (mut level, mut text) = msg.split_once(',').unwrap();
+        let (mut level, mut text) = msg.trim_ascii().split_once(',').unwrap();
 
         if let Some(rest) = text.strip_prefix("TRACE ") {
             level = "debug";
